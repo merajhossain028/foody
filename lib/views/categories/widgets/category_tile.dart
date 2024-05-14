@@ -4,6 +4,7 @@ import 'package:foody/constants/constants.dart';
 import 'package:foody/views/categories/category_page.dart';
 import 'package:get/route_manager.dart';
 
+// ignore: must_be_immutable
 class CategoryTile extends StatelessWidget {
   CategoryTile({
     super.key,
