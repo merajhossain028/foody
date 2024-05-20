@@ -1,30 +1,10 @@
 import 'dart:convert';
 
-FoodsModel foodsModelFromJson(String str) => FoodsModel.fromJson(json.decode(str));
+List<FoodsModel> foodsModelFromJson(String str) => List<FoodsModel>.from(json.decode(str).map((x) => FoodsModel.fromJson(x)));
 
-String foodsModelToJson(FoodsModel data) => json.encode(data.toJson());
+String foodsModelToJson(List<FoodsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class FoodsModel {
-    final bool status;
-    final List<Food> foods;
-
-    FoodsModel({
-        required this.status,
-        required this.foods,
-    });
-
-    factory FoodsModel.fromJson(Map<String, dynamic> json) => FoodsModel(
-        status: json["status"],
-        foods: List<Food>.from(json["foods"].map((x) => Food.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "status": status,
-        "foods": List<dynamic>.from(foods.map((x) => x.toJson())),
-    };
-}
-
-class Food {
     final String id;
     final String title;
     final String time;
@@ -41,7 +21,7 @@ class Food {
     final List<Additive> additives;
     final List<String> imageUrl;
 
-    Food({
+    FoodsModel({
         required this.id,
         required this.title,
         required this.time,
@@ -59,7 +39,7 @@ class Food {
         required this.imageUrl,
     });
 
-    factory Food.fromJson(Map<String, dynamic> json) => Food(
+    factory FoodsModel.fromJson(Map<String, dynamic> json) => FoodsModel(
         id: json["_id"],
         title: json["title"],
         time: json["time"],
