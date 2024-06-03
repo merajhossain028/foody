@@ -14,7 +14,6 @@ class CatagoryList extends HookWidget {
     final hookResult = useFetchCategories();
     List<CatagoriesModel>? categoriesList = hookResult.data;
     final isLoading = hookResult.isLoading;
-    final error = hookResult.error;
 
     return Container(
       height: 80.h,

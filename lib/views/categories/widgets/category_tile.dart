@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foody/constants/constants.dart';
+import 'package:foody/models/categories_model.dart';
 import 'package:foody/views/categories/category_page.dart';
 import 'package:get/route_manager.dart';
 
@@ -11,8 +12,7 @@ class CategoryTile extends StatelessWidget {
     required this.category,
   });
 
-  // ignore: prefer_typing_uninitialized_variables
-  var category;
+  CatagoriesModel category;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +30,12 @@ class CategoryTile extends StatelessWidget {
         radius: 18.r,
         backgroundColor: kGrayLight,
         child: Image.network(
-          category['imageUrl'],
+          category.imageUrl,
           fit: BoxFit.contain,
         ),
       ),
       title: Text(
-        category['title'],
+        category.title,
         style: const TextStyle(
           fontSize: 16,
           color: kGray,
