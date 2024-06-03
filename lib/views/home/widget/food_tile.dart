@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:foody/constants/constants.dart';
+import 'package:foody/models/foods_model.dart';
 
 // ignore: must_be_immutable
 class FoodTile extends StatelessWidget {
@@ -11,8 +12,7 @@ class FoodTile extends StatelessWidget {
     required this.food,
   });
 
-  // ignore: prefer_typing_uninitialized_variables
-  final dynamic food;
+  final FoodsModel food;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,7 +41,7 @@ class FoodTile extends StatelessWidget {
                           width: 70.w,
                           height: 70.h,
                           child: Image.network(
-                            food['imageUrl'],
+                            food.imageUrl[0],
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -74,7 +74,7 @@ class FoodTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        food['title'],
+                        food.title,
                         style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w400,
@@ -82,7 +82,7 @@ class FoodTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Delivery Time: ${food['time']}',
+                        'Delivery Time: ${food.time}',
                         style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w400,
@@ -94,9 +94,9 @@ class FoodTile extends StatelessWidget {
                         height: 15.h,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: food['additives'].length,
+                          itemCount: food.additives.length,
                           itemBuilder: (context, index) {
-                            var additive = food['additives'][index];
+                            var additive = food.additives[index];
                             return Container(
                               margin: EdgeInsets.only(right: 5.w),
                               decoration: BoxDecoration(
@@ -109,7 +109,7 @@ class FoodTile extends StatelessWidget {
                                   child: Padding(
                                 padding: EdgeInsets.all(2.h),
                                 child: Text(
-                                  additive['title'],
+                                  additive.title,
                                   style: TextStyle(
                                     color: kDark,
                                     fontSize: 8.sp,
@@ -138,7 +138,7 @@ class FoodTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10.r),
               ),
               child: Center(
-                child: Text('\$ ${food['price']}',
+                child: Text('\$ ${food.price.toStringAsFixed(2)}',
                     style: TextStyle(
                       color: kLightWhite,
                       fontSize: 12.sp,

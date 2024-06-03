@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:foody/models/foods_model.dart';
 
-class FetchHook {
-  final dynamic data;
+class FetchFoods {
+  final List<FoodsModel>? data;
   final bool isLoading;
   final Exception? error;
   final VoidCallback? refetch;
 
-  FetchHook({
+  FetchFoods({
     required this.data,
     required this.isLoading,
     required this.error,
