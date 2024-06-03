@@ -15,12 +15,12 @@ class CatagoryList extends HookWidget {
     List<CatagoriesModel>? categoriesList = hookResult.data;
     final isLoading = hookResult.isLoading;
 
-    return Container(
-      height: 80.h,
-      padding: EdgeInsets.only(top: 10.h, left: 12.w),
-      child: isLoading
-          ? const CatergoriesShimmer()
-          : ListView(
+    return isLoading
+        ? const CatergoriesShimmer()
+        : Container(
+            height: 80.h,
+            padding: EdgeInsets.only(top: 10.h, left: 12.w),
+            child: ListView(
               scrollDirection: Axis.horizontal,
               children: List.generate(categoriesList!.length, (i) {
                 CatagoriesModel catagory = categoriesList[i];
@@ -29,6 +29,6 @@ class CatagoryList extends HookWidget {
                 );
               }),
             ),
-    );
+          );
   }
 }
