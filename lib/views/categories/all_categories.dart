@@ -20,7 +20,7 @@ class AllCategories extends StatelessWidget {
         color: Colors.white,
         child: Container(
           padding: EdgeInsets.only(left: 12.w, top: 10.h),
-          height: height,
+          height: hieght,
           child: ListView(
             scrollDirection: Axis.vertical,
             children: List.generate(categories.length, (index) {
