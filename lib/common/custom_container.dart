@@ -3,9 +3,14 @@ import 'package:foody/constants/constants.dart';
 
 // ignore: must_be_immutable
 class CustomContainer extends StatelessWidget {
-  CustomContainer({super.key, required this.containerrContent});
+  CustomContainer({
+    super.key,
+    required this.containerrContent,
+    this.color,
+  });
 
   Widget containerrContent;
+  Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class CustomContainer extends StatelessWidget {
         ),
         child: Container(
           width: width,
-          color: kOffWhite,
+          color: color ?? kOffWhite,
           child: SingleChildScrollView(
             child: containerrContent,
           ),
