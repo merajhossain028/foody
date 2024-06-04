@@ -3,10 +3,12 @@ import 'package:foody/common/custom_appbar.dart';
 import 'package:foody/common/custom_container.dart';
 import 'package:foody/common/heading.dart';
 import 'package:foody/constants/constants.dart';
+import 'package:foody/controllers/catagories_controller.dart';
 import 'package:foody/views/home/all_fastest_foods.dart';
 import 'package:foody/views/home/all_nearby_restaurants.dart';
 import 'package:foody/views/home/recommendations.dart';
 import 'package:foody/views/home/widget/catagory_list.dart';
+import 'package:foody/views/home/widget/category_foods_list.dart';
 import 'package:foody/views/home/widget/food_list.dart';
 import 'package:foody/views/home/widget/neraby_restaurant_list.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CategoryController());
     return Scaffold(
       backgroundColor: kPrimaryColor,
       appBar: const PreferredSize(
@@ -27,39 +30,64 @@ class HomePage extends StatelessWidget {
           containerrContent: Column(
             children: [
               const CatagoryList(),
-              Heading(
-                text: 'Nearby Restaurants',
-                onTap: () {
-                  Get.to(
-                    () => const AllNearbyRestaurants(),
-                    transition: Transition.cupertino,
-                    duration: const Duration(milliseconds: 900),
-                  );
-                },
+              Obx(
+                () => controller.categoryValue == ''
+                    ? Column(
+                        children: [
+                          Heading(
+                            text: 'Nearby Restaurants',
+                            onTap: () {
+                              Get.to(
+                                () => const AllNearbyRestaurants(),
+                                transition: Transition.cupertino,
+                                duration: const Duration(milliseconds: 900),
+                              );
+                            },
+                          ),
+                          const NearbyRestaurants(),
+                          Heading(
+                            text: 'Try Something New',
+                            onTap: () {
+                              Get.to(
+                                () => const Recommendations(),
+                                transition: Transition.cupertino,
+                                duration: const Duration(milliseconds: 900),
+                              );
+                            },
+                          ),
+                          const FoodList(),
+                          Heading(
+                            text: 'Fastest food closer to you',
+                            onTap: () {
+                              Get.to(
+                                () => const AllFastestFoods(),
+                                transition: Transition.cupertino,
+                                duration: const Duration(milliseconds: 900),
+                              );
+                            },
+                          ),
+                          const FoodList(),
+                        ],
+                      )
+                    : CustomContainer(
+                        containerrContent: Column(
+                          children: [
+                            Heading(
+                              more: true,
+                              text: 'Explore ${controller.titleValue} Category',
+                              onTap: () {
+                                Get.to(
+                                  () => const Recommendations(),
+                                  transition: Transition.cupertino,
+                                  duration: const Duration(milliseconds: 900),
+                                );
+                              },
+                            ),
+                            CategoryFoodsList(),
+                          ],
+                        ),
+                      ),
               ),
-              const NearbyRestaurants(),
-              Heading(
-                text: 'Try Something New',
-                onTap: () {
-                  Get.to(
-                    () => const Recommendations(),
-                    transition: Transition.cupertino,
-                    duration: const Duration(milliseconds: 900),
-                  );
-                },
-              ),
-              const FoodList(),
-              Heading(
-                text: 'Fastest food closer to you',
-                onTap: () {
-                  Get.to(
-                    () => const AllFastestFoods(),
-                    transition: Transition.cupertino,
-                    duration: const Duration(milliseconds: 900),
-                  );
-                },
-              ),
-              const FoodList(),
             ],
           ),
         ),
