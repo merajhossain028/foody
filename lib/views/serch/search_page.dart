@@ -65,7 +65,8 @@ class _SearchPageState extends State<SearchPage> {
               color: Colors.white,
               containerrContent: controller.isLoading
                   ? const FoodsListShimmer()
-                  : controller.searchResults == null
+                  : controller.searchResults == null ||
+                          controller.searchResults!.isEmpty
                       ? const LoadingWidget()
                       : const SearchResults(),
             ),
