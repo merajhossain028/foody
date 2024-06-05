@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foody/constants/constants.dart';
+import 'package:foody/controllers/catagories_controller.dart';
 import 'package:foody/models/categories_model.dart';
 import 'package:foody/views/categories/category_page.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 
-// ignore: must_be_immutable
 class CategoryTile extends StatelessWidget {
-  CategoryTile({
+  const CategoryTile({
     super.key,
     required this.category,
   });
 
-  CatagoriesModel category;
+  final CatagoriesModel category;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CategoryController());
     return ListTile(
       onTap: () {
+        controller.updateCategory = category.id;
+        controller.updateTitle = category.title;
         Get.to(
           () => const CategoryPage(),
           transition: Transition.fadeIn,

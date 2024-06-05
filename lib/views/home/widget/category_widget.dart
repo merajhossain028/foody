@@ -6,15 +6,13 @@ import 'package:foody/models/categories_model.dart';
 import 'package:foody/views/categories/all_categories.dart';
 import 'package:get/get.dart';
 
-// ignore: must_be_immutable
 class CategoryWidget extends StatelessWidget {
-  CategoryWidget({
+  const CategoryWidget({
     super.key,
     required this.category,
   });
 
-  // ignore: prefer_typing_uninitialized_variables
-  CatagoriesModel category;
+  final CatagoriesModel category;
 
   @override
   Widget build(BuildContext context) {
