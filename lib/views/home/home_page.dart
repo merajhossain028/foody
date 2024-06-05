@@ -35,17 +35,6 @@ class HomePage extends StatelessWidget {
                     ? Column(
                         children: [
                           Heading(
-                            text: 'Nearby Restaurants',
-                            onTap: () {
-                              Get.to(
-                                () => const AllNearbyRestaurants(),
-                                transition: Transition.cupertino,
-                                duration: const Duration(milliseconds: 900),
-                              );
-                            },
-                          ),
-                          const NearbyRestaurants(),
-                          Heading(
                             text: 'Try Something New',
                             onTap: () {
                               Get.to(
@@ -56,6 +45,17 @@ class HomePage extends StatelessWidget {
                             },
                           ),
                           const FoodList(),
+                          Heading(
+                            text: 'Nearby Restaurants',
+                            onTap: () {
+                              Get.to(
+                                () => const AllNearbyRestaurants(),
+                                transition: Transition.cupertino,
+                                duration: const Duration(milliseconds: 900),
+                              );
+                            },
+                          ),
+                          const NearbyRestaurants(),
                           Heading(
                             text: 'Fastest food closer to you',
                             onTap: () {
@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
                                 );
                               },
                             ),
-                            CategoryFoodsList(),
+                            const CategoryFoodsList(),
                           ],
                         ),
                       ),
