@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:foody/constants/constants.dart';
 import 'package:foody/models/foods_model.dart';
+import 'package:foody/views/food/food_page.dart';
+import 'package:get/route_manager.dart';
 
 // ignore: must_be_immutable
 class FoodTile extends StatelessWidget {
@@ -18,7 +20,9 @@ class FoodTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => FoodPage(food: food));
+      },
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
