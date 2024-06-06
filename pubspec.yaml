@@ -38,6 +38,7 @@ dependencies:
   firebase_auth: ^4.19.4
   firebase_core: ^2.30.1
   country_picker_pro: ^0.0.3
+  phone_otp_verification: ^1.0.3
 
 dev_dependencies:
   flutter_test:

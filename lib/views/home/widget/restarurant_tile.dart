@@ -3,6 +3,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foody/constants/constants.dart';
 import 'package:foody/models/restaurants_model.dart';
+import 'package:foody/views/restaurant/restaurant_page.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class RestaurantTile extends StatelessWidget {
@@ -15,7 +17,11 @@ class RestaurantTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(
+          () => RestaurantPage(restaurant: restaurant),
+        );
+      },
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [

@@ -13,6 +13,7 @@ class CustomTextWidget extends StatelessWidget {
     this.suffixIcon,
     this.prefixIcon,
     this.validator,
+    this.maxLines,
   });
 
   final TextInputType? keyboardType;
@@ -23,6 +24,7 @@ class CustomTextWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class CustomTextWidget extends StatelessWidget {
         onEditingComplete: onEditingComplete,
         obscureText: obscureText ?? false,
         cursorHeight: 20.h,
+        maxLines: maxLines,
         style: TextStyle(
           fontSize: 15.sp,
           color: Colors.black,
