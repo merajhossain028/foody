@@ -21,7 +21,7 @@ const kOffWhite = Color(0xffF3F4F8);
 double hieght = 825.h;
 double width = 375.w;
 
-const String appBaseUrl = 'http://192.168.1.8:6013';
+const String appBaseUrl = 'http://192.168.1.11:6013';
 
 final List<String> verificationReasons = [
   'Real-time Updates: Get real-time updates on your order',

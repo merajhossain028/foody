@@ -32,6 +32,8 @@ class _FoodPageState extends State<FoodPage> {
   Widget build(BuildContext context) {
     final hookResult = useFetchSingleRestaurant(widget.food.restaurant);
     final controller = Get.put(FoodController());
+    controller.loadAdditives(widget.food.additives);
+
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.zero,
@@ -142,7 +144,7 @@ class _FoodPageState extends State<FoodPage> {
                     ),
                     Obx(() {
                       return Text(
-                        '\$ ${widget.food.price * controller.count.value}',
+                        '\$ ${(widget.food.price + controller.additivePrice) * controller.count.value}',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -204,47 +206,52 @@ class _FoodPageState extends State<FoodPage> {
                   ),
                 ),
                 SizedBox(height: 10.h),
-                SizedBox(
-                  height: 200.h,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children:
-                          List.generate(widget.food.additives.length, (index) {
-                        final additive = widget.food.additives[index];
-                        return CheckboxListTile(
-                          contentPadding: EdgeInsets.zero,
-                          visualDensity: VisualDensity.compact,
-                          dense: true,
-                          activeColor: kSecondaryColor,
-                          value: true,
-                          tristate: false,
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                additive.title,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: kDark,
+                Obx(() {
+                  return SizedBox(
+                    height: 200.h,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: List.generate(controller.additivesList.length,
+                            (index) {
+                          final additive = controller.additivesList[index];
+                          return CheckboxListTile(
+                            contentPadding: EdgeInsets.zero,
+                            visualDensity: VisualDensity.compact,
+                            dense: true,
+                            activeColor: kSecondaryColor,
+                            value: additive.isChecked.value,
+                            tristate: false,
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  additive.title,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: kDark,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '\$${additive.price}',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: kPrimaryColor,
+                                Text(
+                                  '\$${additive.price}',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: kPrimaryColor,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          onChanged: (bool? value) {},
-                        );
-                      }),
+                              ],
+                            ),
+                            onChanged: (bool? value) {
+                              additive.toggleCheck();
+                              controller.getTotalPrice();
+                            },
+                          );
+                        }),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 SizedBox(height: 20.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
